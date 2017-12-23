@@ -7,7 +7,6 @@
         xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="SuperFlange.MainWindow"
         mc:Ignorable="d"
         Title="SuperFlange" 
-        Icon="/Resources/SuperFlange.ico"
         Height="{Binding SystemParameters.PrimaryScreenHeight}" 
         Width="{Binding SystemParameters.PrimaryScreenWidth}"
         WindowState="Maximized">
