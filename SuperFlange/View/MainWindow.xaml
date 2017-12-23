@@ -1,0 +1,30 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SuperFlange"
+        xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="SuperFlange.MainWindow"
+        mc:Ignorable="d"
+        Title="SuperFlange" 
+        Icon="/Resources/SuperFlange.ico"
+        Height="{Binding SystemParameters.PrimaryScreenHeight}" 
+        Width="{Binding SystemParameters.PrimaryScreenWidth}"
+        WindowState="Maximized">
+
+    <!--<ContentControl x:Name="FlangeContentControl" Margin="0,130,250,0" Height="103" Width="219" />-->
+    <Grid>
+        <Custom:Ribbon x:Name="Ribbon" HorizontalAlignment="Left" VerticalAlignment="Top" Height="140" Width="760">
+            <Custom:RibbonTab Header="Flange">
+                <Custom:RibbonGroup Header="1st Flange" Width="100" Height="66" Margin="0">
+                    <Custom:RibbonButton Margin="10,0,-77,-47" LargeImageSource="/Resources/Flange-1.png" RenderTransformOrigin="0.167,0.651" />
+                </Custom:RibbonGroup>
+                <Custom:RibbonGroup Header="2nd Flange" Width="100" Height="66" Margin="0">
+                    <Custom:RibbonButton Margin="10,0,-77,-47" LargeImageSource="/Resources/Flange-2.png" RenderTransformOrigin="0.167,0.651" VerticalAlignment="Top" />
+                </Custom:RibbonGroup>
+            </Custom:RibbonTab>
+            <Custom:RibbonTab Header="Bolt"/>
+            <Custom:RibbonTab Header="Gasket"/>
+        </Custom:Ribbon>
+    </Grid>
+</Window>
