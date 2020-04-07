@@ -2,8 +2,47 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SuperFlange"
+             xmlns:converters="clr-namespace:SuperFlange.Converters" xmlns:controls="clr-namespace:SuperFlange.Controls"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Dark.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:DataTemplateConverter x:Key="DataTemplateConverter"/>
+            <converters:EnumValuesConverter x:Key="EnumValuesConverter"/>
+            <converters:StringToEnumConverter x:Key="StringToEnumConverter"/>
+            <converters:TypeToStringTypeConverter x:Key="TypeToStringTypeConverter"/>
+
+            <DataTemplate x:Key="PropertyEntryDataTemplate">
+                <ContentPresenter Content="{Binding }" ContentTemplate="{Binding DataTemplateKey, Converter={StaticResource DataTemplateConverter}}"/>
+            </DataTemplate>
+
+            <DataTemplate x:Key="StringPropertyEntryDataTemplate">
+                <StackPanel Margin="0,0,0,4" Orientation="Horizontal">
+                    <TextBlock Text="{Binding DisplayName}" Width="250"/>
+                    <controls:TextBoxEx 
+                        Margin="0,0,4,0"
+                        Width="100" TextAlignment="Right" 
+                        Text="{Binding Value}" 
+                        TextType="{Binding PropertyInfo.PropertyType, Converter={StaticResource TypeToStringTypeConverter}}"/>
+                    <TextBlock Text="{Binding Units}"/>
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="EnumPropertyEntryDataTemplate">
+                <StackPanel Margin="0,0,0,4" Orientation="Horizontal">
+                    <TextBlock 
+                        Text="{Binding DisplayName}" 
+                        Width="250"/>
+                    <ComboBox 
+                        Width="100"
+                        SelectedValue="{Binding Value, Converter={StaticResource StringToEnumConverter}}"
+                        ItemsSource="{Binding PropertyInfo.PropertyType, Converter={StaticResource EnumValuesConverter}}"/>
+                </StackPanel>
+            </DataTemplate>
+            
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

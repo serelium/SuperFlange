@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SuperFlange.ViewModel
+namespace SuperFlange.Models
 {
-    public class ShellViewModel : ViewModel
+    public class Shell : Element
     {
-
     }
 }

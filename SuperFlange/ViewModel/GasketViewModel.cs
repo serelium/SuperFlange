@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SuperFlange.ViewModel
 {
-    class GasketViewModel : ViewModelBase
+    public class GasketViewModel : ViewModel
     {
 
     }

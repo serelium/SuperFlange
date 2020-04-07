@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using SuperFlange.ViewModel;
+using SuperFlange.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,9 +26,7 @@ namespace SuperFlange
         public MainWindow()
         {
             InitializeComponent();
-            FlangeCanvas flangeCanevas = new FlangeCanvas();
-            //FlangeContentControl.Content = flangeCanevas;
-            Ribbon.Width = SystemParameters.FullPrimaryScreenWidth;
+            DataContext = new MainViewModel();
         }
     }
 }

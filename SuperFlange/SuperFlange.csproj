@@ -38,12 +38,26 @@
     <StartupObject>SuperFlange.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="RibbonControlsLibrary, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="MWArray, Version=2.18.1.0, Culture=neutral, PublicKeyToken=e1d84a0da19db86f" />
+    <Reference Include="presentationframework.aero2" />
+    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="SuperFlangeSolver">
+      <HintPath>..\..\..\..\SFC++\SF++20-1-2006\Compiled Matlab\SuperFlangeSolver\for_redistribution_files_only\SuperFlangeSolver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,23 +78,41 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Controls\PipePanel.cs" />
+    <Compile Include="Controls\TextBoxEx.cs" />
+    <Compile Include="Converters\DataTemplateConverter.cs" />
+    <Compile Include="Converters\EnumValuesConverter.cs" />
+    <Compile Include="Converters\StringToEnumConverter.cs" />
+    <Compile Include="Converters\TypeToStringTypeConverter.cs" />
+    <Compile Include="DatabaseConnection.cs" />
+    <Compile Include="Models\Command.cs" />
+    <Compile Include="Models\Element.cs" />
+    <Compile Include="Models\NotifyPropertyChanged.cs" />
+    <Compile Include="Models\Pipe.cs" />
+    <Compile Include="Utils\StringExtensions.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\FlangePanel.xaml.cs">
       <DependentUpon>FlangePanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Bolt.cs" />
-    <Compile Include="Model\Flange.cs" />
-    <Compile Include="Model\Gasket.cs" />
-    <Compile Include="Model\Material.cs" />
-    <Compile Include="Model\Metal.cs" />
-    <Compile Include="Model\ObservableObject.cs" />
-    <Compile Include="Model\Plastic.cs" />
-    <Compile Include="Model\Shell.cs" />
+    <Compile Include="Models\Bolt.cs" />
+    <Compile Include="Models\Flange.cs" />
+    <Compile Include="Models\Gasket.cs" />
+    <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\Shell.cs" />
     <Compile Include="ViewModel\BoltViewModel.cs" />
     <Compile Include="ViewModel\FlangeViewModel.cs" />
     <Compile Include="ViewModel\GasketViewModel.cs" />
     <Compile Include="ViewModel\ShellViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="WindowsFormUtils.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
+    <Page Include="Dark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Light.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\FlangePanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +149,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -130,7 +166,9 @@
     <Resource Include="Resources\bitmap1.bmp" />
     <Resource Include="Resources\Help.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\SuperFlange.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Flange.png" />
   </ItemGroup>
@@ -138,6 +176,19 @@
     <Resource Include="Resources\Flange-1.png" />
     <Resource Include="Resources\Flange-2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="bbs.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\closeWindow.png" />
+    <Resource Include="Resources\closeWindowBlack.png" />
+    <Resource Include="Resources\maximizeRestoreWindow.png" />
+    <Resource Include="Resources\maximizeRestoreWindowBlack.png" />
+    <Resource Include="Resources\minimizeWindow.png" />
+    <Resource Include="Resources\minimizeWindowBlack.png" />
+    <Resource Include="Resources\WeldNeck.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

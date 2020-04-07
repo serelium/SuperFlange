@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SuperFlange.ViewModel
 {
-    class BoltViewModel : ViewModelBase
+    public class BoltViewModel : ViewModel
     {
 
     }
