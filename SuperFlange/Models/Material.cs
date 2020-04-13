@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SuperFlange.Models
 {
-    public class Material : Element
+    public class Material : ElementBase
     {
         private float _YoungModulus;
-        [RequiredProperty]
+        [Measure(1, units: "mm", isRequired: true)]
         public float YoungModulus
         {
             get => _YoungModulus;
@@ -17,7 +17,7 @@ namespace SuperFlange.Models
         }
 
         private float _PoissonRatio;
-        [RequiredProperty]
+        [Measure(2, units: "mm", isRequired: true)]
         public float PoissonRatio
         {
             get => _PoissonRatio;
@@ -25,7 +25,7 @@ namespace SuperFlange.Models
         }
 
         private float _AllowableStress;
-        [RequiredProperty]
+        [Measure(3, units: "mm", isRequired: true)]
         public float AllowableStress
         {
             get => _AllowableStress;
@@ -33,7 +33,7 @@ namespace SuperFlange.Models
         }
 
         private float _ThermalExpansionCoefficient;
-        [RequiredProperty]
+        [Measure(4, units: "mm", isRequired: true)]
         public float ThermalExpansionCoefficient
         {
             get => _ThermalExpansionCoefficient;
@@ -41,7 +41,7 @@ namespace SuperFlange.Models
         }
 
         private float _ThermalConductivity;
-        [RequiredProperty]
+        [Measure(5, units: "mm", isRequired: true)]
         public float ThermalConductivity
         {
             get => _ThermalConductivity;
@@ -49,7 +49,7 @@ namespace SuperFlange.Models
         }
 
         private float _OutsideHeatFilmTransferCoefficient;
-        [RequiredProperty]
+        [Measure(6, units: "mm", isRequired: true)]
         public float OutsideHeatFilmTransferCoefficient
         {
             get => _OutsideHeatFilmTransferCoefficient;
@@ -57,7 +57,7 @@ namespace SuperFlange.Models
         }
 
         private float _InsideHeatFilmTransferCoefficient;
-        [RequiredProperty]
+        [Measure(7, units: "mm", isRequired: true)]
         public float InsideHeatFilmTransferCoefficient
         {
             get => _InsideHeatFilmTransferCoefficient;
@@ -65,7 +65,7 @@ namespace SuperFlange.Models
         }
 
         private float _CreepConstantA;
-        [RequiredProperty]
+        [Measure(8, units: "mm", isRequired: true)]
         public float CreepConstantA
         {
             get => _CreepConstantA;
@@ -73,7 +73,7 @@ namespace SuperFlange.Models
         }
 
         private float _CreepConstantM;
-        [RequiredProperty]
+        [Measure(9, units: "mm", isRequired: true)]
         public float CreepConstantM
         {
             get => _CreepConstantM;
@@ -81,7 +81,7 @@ namespace SuperFlange.Models
         }
 
         private float _CreepConstantN;
-        [RequiredProperty]
+        [Measure(10, units: "mm", isRequired: true)]
         public float CreepConstantN
         {
             get => _CreepConstantN;

@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace SuperFlange.ViewModel
@@ -15,23 +17,9 @@ namespace SuperFlange.ViewModel
     {
         public Flange FirstFlange { get; set; }
         public Flange SecondFlange { get; set; }
-
-        public PointCollection DefaultFlangePoints
-        {
-            get
-            {
-                PointCollection flangePolygon = new PointCollection();
-
-                flangePolygon.Add(new Point(0, 0));
-                flangePolygon.Add(new Point(0, 10));
-                flangePolygon.Add(new Point(15, 50));
-                flangePolygon.Add(new Point(65, 50));
-                flangePolygon.Add(new Point(65, 80));
-                flangePolygon.Add(new Point(0, 80));
-
-                return flangePolygon;
-            }
-        }
+        public Bolt Bolt { get; set; }
+        public Gasket Gasket { get; set; }
+        public OperatingConditions OperatingConditions { get; set; }
 
         public ICommand MinimizeWindowCommand { get; set; }
         public ICommand MaximizeRestoreCommand { get; set; }
@@ -39,16 +27,23 @@ namespace SuperFlange.ViewModel
         public ICommand SetDarkThemeCommand { get; set; }
         public ICommand SetLightThemeCommand { get; set; }
 
+        public ICommand SelectCommand { get; set; }
+        public ICommand SolveCommand { get; set; }
+
         public MainViewModel()
         {
             FirstFlange = new Flange();
             SecondFlange = new Flange();
+            Bolt = new Bolt();
+            Gasket = new Gasket();
+            OperatingConditions = new OperatingConditions();
 
             MinimizeWindowCommand = new Command(Minimize);
             MaximizeRestoreCommand = new Command(MaximizeRestore);
             CloseWindowCommand = new Command(CloseWindow);
             SetDarkThemeCommand = new Command(() => SetTheme(Theme.Dark));
             SetLightThemeCommand = new Command(() => SetTheme(Theme.Light));
+            SolveCommand = new Command(() => Solve());
         }
 
         public void CloseWindow()
@@ -76,9 +71,19 @@ namespace SuperFlange.ViewModel
             ((App)Application.Current).SetTheme(theme);
         }
 
-        public enum Theme
+        public void Solve()
         {
-            Dark, Light
+            using (SuperFlangeSolverNative.SuperFlangeSolver solver = new SuperFlangeSolverNative.SuperFlangeSolver())
+            {
+                //solver.superflangeNaim(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+                solver.superflange();
+            }
         }
+    }
+
+    public enum Theme
+    {
+        Dark, 
+        Light
     }
 }

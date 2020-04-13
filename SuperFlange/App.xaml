@@ -42,6 +42,10 @@
                         ItemsSource="{Binding PropertyInfo.PropertyType, Converter={StaticResource EnumValuesConverter}}"/>
                 </StackPanel>
             </DataTemplate>
+
+            <Path x:Key="SuperFlangeIcon" Data="M2 30 L22 30 L22 2 L18 2 L16 24 L2 24 M42 2 L46 2 L48 24 L62 24 L62 30 L42 30 M22 34 L2 34 L2 40 L16 40 L18 62 L22 62 M42 34 L62 34 L62 40 L48 40 L46 62 L42 62" 
+                    Fill="Gray" StrokeThickness="1" 
+                    Stroke="White"/>
             
         </ResourceDictionary>
     </Application.Resources>

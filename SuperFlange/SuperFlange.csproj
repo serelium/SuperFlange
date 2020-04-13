@@ -37,19 +37,38 @@
   <PropertyGroup>
     <StartupObject>SuperFlange.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
-    </Reference>
-    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="MWArray, Version=2.18.1.0, Culture=neutral, PublicKeyToken=e1d84a0da19db86f" />
     <Reference Include="presentationframework.aero2" />
-    <Reference Include="RibbonControlsLibrary, Version=4.0.0.11019, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="SuperFlangeSolver">
+    <Reference Include="SuperFlangeSolver, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\SFC++\SF++20-1-2006\Compiled Matlab\SuperFlangeSolver\for_redistribution_files_only\SuperFlangeSolver.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperFlangeSolverNative">
+      <HintPath>..\..\..\..\SFC++\SF++20-1-2006\Compiled Matlab\SuperFlangeSolver\for_redistribution_files_only\SuperFlangeSolverNative.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -87,13 +106,12 @@
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="Models\Command.cs" />
     <Compile Include="Models\Element.cs" />
+    <Compile Include="Models\ElementBase.cs" />
     <Compile Include="Models\NotifyPropertyChanged.cs" />
+    <Compile Include="Models\OperatingConditions.cs" />
     <Compile Include="Models\Pipe.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="View\FlangePanel.xaml.cs">
-      <DependentUpon>FlangePanel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Bolt.cs" />
     <Compile Include="Models\Flange.cs" />
     <Compile Include="Models\Gasket.cs" />
@@ -112,10 +130,6 @@
     <Page Include="Light.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\FlangePanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

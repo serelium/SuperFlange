@@ -1,12 +1,11 @@
-﻿using System;
+﻿using SuperFlange.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using static SuperFlange.MainWindow;
-using static SuperFlange.ViewModel.MainViewModel;
 
 namespace SuperFlange
 {

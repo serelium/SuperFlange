@@ -5,20 +5,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:SuperFlange"
-    xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-    xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" xmlns:converters="clr-namespace:SuperFlange.Converters"
+    xmlns:viewModels="clr-namespace:SuperFlange.ViewModel"
+    xmlns:converters="clr-namespace:SuperFlange.Converters"
     mc:Ignorable="d"
     Title="Super Flange"
     Height="800"
-    Width="1000"
+    Width="1200"
     WindowState="Maximized"
     Icon="/Resources/SuperFlange.ico"
     Style="{DynamicResource CustomWindowStyle}"
     WindowStyle="SingleBorderWindow">
-    <Window.Resources>
-        
-    </Window.Resources>
-    
+    <Window.DataContext>
+        <viewModels:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -29,6 +28,7 @@
                 <MenuItem Header="Open File" Template="{DynamicResource DropDownMenuItemTemplate}"/>
                 <MenuItem Header="New File" Template="{DynamicResource DropDownMenuItemTemplate}"/>
                 <MenuItem Header="Save File" Template="{DynamicResource DropDownMenuItemTemplate}"/>
+                <MenuItem Header="Solve" Template="{DynamicResource DropDownMenuItemTemplate}" Command="{Binding SolveCommand}"/>
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1">
@@ -38,18 +38,16 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="10">
                 <TextBlock Text="Pipe"/>
-                <Canvas 
-                    Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl, AncestorLevel=1}, Path=ActualHeight}"
-                    Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl, AncestorLevel=1}, Path=ActualWidth}">
-                    <Polygon Points="200,0 160,0 130,200 0,200 0,280 200,280" Fill="Gray" StrokeThickness="2" Stroke="White"/>
-                    <Polygon Points="0,0 40,0 70,200 200,200 200,280 0,280" Fill="Gray" StrokeThickness="2" Stroke="White" Canvas.Left="450"/>
+                <Canvas x:Name="_PipeCanvas" IsHitTestVisible="False">
+                    <Polygon Points="200,0 160,0 130,200 0,200 0,280 200,280" Fill="Gray" StrokeThickness="3" Stroke="White"/>
+                    <Polygon Points="0,0 40,0 70,200 200,200 200,280 0,280" Fill="Gray" StrokeThickness="3" Stroke="White" Canvas.Left="450"/>
 
-                    <Polygon ClipToBounds="True" Points="200,0 160,0 130,200 0,200 0,280 200,280" Fill="Gray" StrokeThickness="2" Stroke="White" Canvas.Top="570">
+                    <Polygon ClipToBounds="True" Points="200,0 160,0 130,200 0,200 0,280 200,280" Fill="Gray" StrokeThickness="3" Stroke="White" Canvas.Top="570">
                         <Polygon.RenderTransform>
                             <ScaleTransform ScaleY="-1"/>
                         </Polygon.RenderTransform>
                     </Polygon>
-                    <Polygon ClipToBounds="True" Points="0,0 40,0 70,200 200,200 200,280 0,280" Fill="Gray" StrokeThickness="2" Stroke="White" Canvas.Left="450" Canvas.Top="570">
+                    <Polygon ClipToBounds="True" Points="0,0 40,0 70,200 200,200 200,280 0,280" Fill="Gray" StrokeThickness="3" Stroke="White" Canvas.Left="450" Canvas.Top="570">
                         <Polygon.RenderTransform>
                             <ScaleTransform ScaleY="-1"/>
                         </Polygon.RenderTransform>
@@ -57,7 +55,7 @@
                 </Canvas>
             </StackPanel>
             <DockPanel Grid.Column="1">
-                <TabControl  Margin="10">
+                <TabControl x:Name="_TabControl" Margin="10">
                     <TabItem 
                         Header="First Flange">
                         <StackPanel>
@@ -67,23 +65,92 @@
                             <ItemsControl
                                 Margin="20,10,0,20"
                                 ItemsSource="{Binding FirstFlange.RequiredProperties}"
-                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}">
-                            </ItemsControl>
-                            
+                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}"/>
+
                             <TextBlock Margin="10,0,0,0" Text="Material Properties"></TextBlock>
-                            
+
                             <ItemsControl
                                 Margin="20,10,0,20"
                                 ItemsSource="{Binding FirstFlange.Material.RequiredProperties}"
-                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}">
-                                   
-                            </ItemsControl>
-                            
+                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}"/>
+
                         </StackPanel>
                     </TabItem>
                     <TabItem 
                         Header="Second Flange" >
-                        
+                        <StackPanel>
+
+                            <TextBlock Margin="10,10,0,0" Text="Properties"></TextBlock>
+
+                            <ItemsControl
+                                Margin="20,10,0,20"
+                                ItemsSource="{Binding SecondFlange.RequiredProperties}"
+                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}"/>
+
+                            <TextBlock Margin="10,0,0,0" Text="Material Properties"></TextBlock>
+
+                            <ItemsControl
+                                Margin="20,10,0,20"
+                                ItemsSource="{Binding SecondFlange.Material.RequiredProperties}"
+                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}"/>
+
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem 
+                        Header="Bolt" >
+                        <StackPanel>
+
+                            <TextBlock Margin="10,10,0,0" Text="Properties"></TextBlock>
+
+                            <ItemsControl
+                                Margin="20,10,0,20"
+                                ItemsSource="{Binding Bolt.RequiredProperties}"
+                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}"/>
+
+                            <TextBlock Margin="10,0,0,0" Text="Material Properties"></TextBlock>
+
+                            <ItemsControl
+                                Margin="20,10,0,20"
+                                ItemsSource="{Binding Bolt.Material.RequiredProperties}"
+                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}"/>
+
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem 
+                        Header="Gasket" >
+                        <StackPanel>
+
+                            <TextBlock Margin="10,10,0,0" Text="Properties"></TextBlock>
+
+                            <ItemsControl
+                                Margin="20,10,0,20"
+                                ItemsSource="{Binding Gasket.RequiredProperties}"
+                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}">
+                            </ItemsControl>
+
+                            <TextBlock Margin="10,0,0,0" Text="Material Properties"></TextBlock>
+
+                            <ItemsControl
+                                Margin="20,10,0,20"
+                                ItemsSource="{Binding Gasket.Material.RequiredProperties}"
+                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}">
+
+                            </ItemsControl>
+
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem 
+                        Header="Operating Conditions" >
+                        <StackPanel>
+
+                            <TextBlock Margin="10,10,0,0" Text="Properties"></TextBlock>
+
+                            <ItemsControl
+                                Margin="20,10,0,20"
+                                ItemsSource="{Binding OperatingConditions.RequiredProperties}"
+                                ItemTemplate="{StaticResource PropertyEntryDataTemplate}">
+                            </ItemsControl>
+                        </StackPanel>
                     </TabItem>
                 </TabControl>
             </DockPanel>

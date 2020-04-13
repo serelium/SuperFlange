@@ -13,9 +13,24 @@ namespace SuperFlange.Models
 
         #region Properties
 
+        private FlangeType _FlangeType;
+        [Measure(1, isRequired: true)]
+        public FlangeType FlangeType
+        {
+            get => _FlangeType;
+            set => SetPropertyBackingField(ref _FlangeType, value, nameof(FlangeType));
+        }
+
+        private int _NumberOfBolts;
+        [Measure(2, isRequired: true)]
+        public int NumberOfBolts
+        {
+            get => _NumberOfBolts;
+            set => SetPropertyBackingField(ref _NumberOfBolts, value, nameof(NumberOfBolts));
+        }
+
         private float _Thickness;
-        [RequiredProperty]
-        [Units("mm")]
+        [Measure(3, units: "mm", isRequired: true)]
         public float Thickness
         {
             get => _Thickness;
@@ -23,8 +38,7 @@ namespace SuperFlange.Models
         }
 
         private float _OutsideDiameter;
-        [RequiredProperty]
-        [Units("mm")]
+        [Measure(4, units: "mm", isRequired: true)]
         public float OutsideDiameter
         {
             get => _OutsideDiameter;
@@ -32,8 +46,7 @@ namespace SuperFlange.Models
         }
 
         private float _RaisedFaceDiameter;
-        [RequiredProperty]
-        [Units("mm")]
+        [Measure(5, units: "mm", isRequired: true)]
         public float RaisedFaceDiameter
         {
             get => _RaisedFaceDiameter;
@@ -41,8 +54,7 @@ namespace SuperFlange.Models
         }
 
         private float _BoreDiameter;
-        [RequiredProperty]
-        [Units("mm")]
+        [Measure(6, units: "mm", isRequired: true)]
         public float BoreDiameter
         {
             get => _BoreDiameter;
@@ -50,8 +62,7 @@ namespace SuperFlange.Models
         }
 
         private float _HubThickness;
-        [RequiredProperty]
-        [Units("mm")]
+        [Measure(7, units: "mm", isRequired: true)]
         public float HubThickness
         {
             get => _HubThickness;
@@ -59,8 +70,7 @@ namespace SuperFlange.Models
         }
 
         private float _HubLength;
-        [RequiredProperty]
-        [Units("mm")]
+        [Measure(8, units: "mm", isRequired: true)]
         public float HubLength
         {
             get => _HubLength;
@@ -68,43 +78,26 @@ namespace SuperFlange.Models
         }
 
         private float _RaisedFaceHeight;
-        [RequiredProperty]
-        [Units("mm")]
+        [Measure(9, units: "mm", isRequired: true)]
         public float RaisedFaceHeight
         {
             get => _RaisedFaceHeight;
             set => SetPropertyBackingField(ref _RaisedFaceHeight, value, nameof(RaisedFaceHeight));
         }
 
-        private int _NumberOfBolts;
-        [RequiredProperty]
-        public int NumberOfBolts
-        {
-            get => _NumberOfBolts;
-            set => SetPropertyBackingField(ref _NumberOfBolts, value, nameof(NumberOfBolts));
-        }
-
         private float _BoltCircleDiameter;
-        [RequiredProperty]
-        [Units("mm")]
+        [Measure(10, units: "mm", isRequired: true)]
         public float BoltCircleDiameter
         {
             get => _BoltCircleDiameter;
             set => SetPropertyBackingField(ref _BoltCircleDiameter, value, nameof(BoltCircleDiameter));
         }
-
-        private FlangeType _FlangeType;
-        [RequiredProperty]
-        public FlangeType FlangeType
-        {
-            get => _FlangeType;
-            set => SetPropertyBackingField(ref _FlangeType, value, nameof(FlangeType));
-        }
         #endregion
 
         public Flange()
+            : base()
         {
-            Material = new Material();
+
         }
     }
 

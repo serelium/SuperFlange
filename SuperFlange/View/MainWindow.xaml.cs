@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using SuperFlange.ViewModel;
+﻿using SuperFlange.ViewModel;
 using SuperFlange.Models;
 using System;
 using System.Collections.Generic;
@@ -27,6 +26,11 @@ namespace SuperFlange
         {
             InitializeComponent();
             DataContext = new MainViewModel();
+        }
+
+        public void SwitchTabs()
+        {
+            //_TabControl.SelectedItem
         }
     }
 }

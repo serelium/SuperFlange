@@ -17,7 +17,7 @@ namespace SuperFlange
         {
 
             DatabaseConnection conn = DatabaseConnection.GetInstance();
-            conn.ExectueQuery("Select * from NPS_Table");
+            //conn.ExectueQuery("Select * from NPS_Table");
 
             //SuperFlangeSolver.SuperFlangeSolver solver = new SuperFlangeSolver.SuperFlangeSolver();
             //solver.superflangeNaim();
